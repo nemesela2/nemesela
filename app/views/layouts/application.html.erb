@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestDevRails</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-text pull-left list-inline mr-auto">
+        <li class="active list-inline-item"><a href="/">Posts</a></li>
+        |
+        <%= link_to "Create New Post", new_post_path, class: "navbar-item list-inline-item" %>
+      </ul>
+
+      <ul class="navbar-text">
+        <% if user_signed_in? %>
+          Logged in as <strong><%= current_user.email %></strong>.
+          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+        <% else %>
+          <%= link_to "Registration", new_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+        <% end %>
+      </ul>
+    </nav>
+
+    <% flash.each do |type, content| %>
+      <%= render 'partials/flash', type: type, content: content %>
+    <% end %>
+
+    <%= yield %>
+  </div>
+</body>
+</html>

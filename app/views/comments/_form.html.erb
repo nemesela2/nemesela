@@ -1,0 +1,24 @@
+<div class="section">
+  <%= simple_form_for [@post, @post.comments.new] do |f| %>
+    <div class="field mb-4">
+      <div class="control">
+        <%= f.input :body, input_html: { class: 'textarea' }, wrapper: false, label_html: { class: 'label' }  %>
+      </div>
+    </div>
+    <%= f.button :submit, 'Add comment', class: "btn-submit btn btn-primary", disabled: :disabled %>
+  <% end %>
+
+  <%= javascript_tag do %>
+    $(function(){
+      $('form.new_comment').on('keyup', function(e) {
+        var submitBtn = $('.btn-submit');
+        if (e.target.value.length > 0) {
+          submitBtn.removeAttr('disabled');
+        }
+        else {
+          submitBtn.attr('disabled', true);
+        }
+      });
+    });
+  <% end %>
+</div>

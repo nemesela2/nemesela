@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="media">
+      <div class="media-body">
+        <h5 class="mt-0">
+          <%= link_to post.title, post_path(post) %>
+          <%= link_to '(edit)', edit_post_path(post), class: 'pull-right small' %>
+        </h5>
+        <%= post.description.html_safe %>
+        <%= render post.comments %>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
